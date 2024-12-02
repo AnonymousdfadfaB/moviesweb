@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+			* { 
+				box-sizing: border-box;
+				padding: 0px;
+			}
+
+			.container {
+				width: 1200px;
+				margin: auto;
+				display: grid;
+				grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px 100px 100px 100px 100px;
+			}
+			.item-1 {
+				grid-row: 1 / 2;
+				grid-column: 1 / 13;
+			}
+			.item-2 {
+				grid-row: 2 / 3;
+				grid-column: 1 / 10;
+			}
+			.item-3 {
+				grid-row: 3 / 4;
+				grid-column: 1 / 10;
+			}
+			.item-4 {
+				grid-row: 2 / 4;
+				grid-column: 10 / 13;
+			}
+			.item-5 {
+				grid-row: 4 / 5;
+				grid-column: 1 / 13;
+			}
+			.post {
+				border: 1px solid yellow;
+				display: inline-block;
+				position: relative;
+			}
+			.image-post {
+				width: 218px;
+				border: 1px solid red;
+			}
+			.title {
+				width: 100px;
+				color: red;
+				background-color: grey;
+				border: 1px solid red;
+				position: absolute;
+				margin: auto;
+				left: 0px;
+				right: 0px;
+
+			}
+</style>
+		<div class="container" data-a="b">
+			<nav class="item item-1 nav">
+				<div class="logo">
+					<img src="./images/logoMovies20.png" />
+				</div>
+				<ul class="menu"> 
+					<li>Phim lẻ</li>
+					<li>Phim bộ</li> 
+					<li class="menu-content-li">Thể loại
+						<ul class="menu-content">
+							<li>Phim Cổ Trang</li>
+							<li>Phim Tâm Lý</li>
+							<li>Phim Tình Cảm</li>
+							<li>Phim Bí Ẩn</li>
+							<li>Phim Kinh Dị</li>
+							<li>Phim Hành Động</li>
+							<li>Phim Võ Thuật</li>
+							<li>Phim Kịch Tính</li>
+							<li>Phim Chiến Tranh</li>
+							<li>Phim Phiêu Lưu</li>
+						</ul>
+					</li> 
+					<li class="menu-content-li">Quốc gia
+						<ul class="menu-content">
+							<li>Phim Âu Mỹ</li>
+							<li>Phim Hàn Quốc</li>
+							<li>Phim Trung Quốc</li>
+							<li>Phim Nhật Bản</li>		
+							<li>Phim Đài Loan</li>				
+						</ul>
+					</li>
+				</ul>		
+				<input class="search" type="search" />
+			</nav>
+
+			<section class="item item-2 top-recently">
+				<div class="imagesList">
+					<img src="./images/movie1.jpg" /><img src="./images/movie2.jpg" /><img src="./images/movie3.jpg" /><img src="./images/movie4.jpg" /><img src="./images/movie1.jpg" /><img src="./images/movie2.jpg" /><img src="./images/movie3.jpg" /><img src="./images/movie4.jpg" />
+				</div>
+				<button data-item="1">a</button> <button data-item="2">b</button> <button data-item="3">c</button> <button data-item="4">d</button>
+			</section>
+			<section class="item item-3 content"> 
+				<article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" />
+					<div class="title">
+						phim hay
+					</div>
+				</article>
+				<article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" />
+					<div class="title">
+						phim hay
+					</div>
+				</article><article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" />
+					<div class="title">
+						phim hay
+					</div>
+				</article>
+				<article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" /><div class="title">
+						phim hay
+					</div>
+				</article>
+			</section>
+			<aside class="item item-4"><aside> 
+			<footer class="item item-5"></footer> 
+		</div>
+</html>

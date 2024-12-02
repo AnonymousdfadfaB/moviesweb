@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			movie web
+		</title>
+		<style>
+			* { 
+				box-sizing: border-box;	
+
+			}
+			body {
+				font-family: sans-serif;
+				border: 1px solid yellow;
+				margin: 0px
+			}
+			.container {
+				width: 90%;
+				max-width: 1200px;
+				margin: 0px auto;
+				display: grid;
+				grid-template-columns: repeat(12, 1fr);
+				grid-template-areas: 
+					"nav nav nav nav nav nav nav nav nav nav nav nav"
+					"hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content year-movies-content year-movies-content year-movies-content"
+					"movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content year-movies-content year-movies-content year-movies-content"
+					"contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements";
+			}
+
+			.item {
+
+			}
+			.nav {
+				//grid-row: 1 / 2;
+				//grid-column: 1 / 13;
+				grid-area: nav;	
+			}
+			.hot-content {
+				//grid-row: 2 / 3;
+				//grid-column: 1 / 10;
+				grid-area: hot-content; 
+			}
+			.movies-content {
+				//grid-row: 3 / 4;
+				//grid-column: 1 / 10;
+				grid-area: movies-content;
+			}
+			.year-movies-content {
+				//grid-row: 2 / 4;
+				//grid-column: 10 / 13;
+				grid-area: year-movies-content;
+			}
+			.contact-and-statements {
+				//grid-row: 4 / 5;
+				//grid-column: 1 / 13;
+				grid-area: contact-and-statements;
+			}
+			section {
+				border: 1ps solid red;
+			}
+			.nav {
+				overflow: auto;
+			}
+			.nav > .logo > img {
+				float: left;
+				height: 72px;
+
+			}
+			.nav > ul.menu {
+				display: inline-block;
+				float: left;
+				border: 1px solid red;
+				margin: 0;
+				list-style-type: none;
+				padding: 0px;
+			}
+			.nav > input.search {
+				display: inline-block;
+				float: right;
+				border: 1px solid red;
+		
+				margin: 16px 0px;
+				padding: 11px 15px;
+			}
+			.sub-menu-content {
+				position: absolute;
+				top: 80px;
+				display: none;
+				width: 380px;
+				background-color: rgba(0,0,0,0.5);
+				padding: 10px 0 10px 10px;
+				z-index: 1;
+			}
+			.sub-menu-content > li {
+				display: inline-block;
+				width: 120px;
+				border: 1px solid blue;
+			}
+			.active {
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.nav > .menu > li {
+				margin: 0px;
+				display: inline-block;
+				border: 1px solid red;
+				padding: 25px 20px;
+			}
+			.hot-content {
+				overflow: hidden;
+			}
+			.hot-content-list {
+				display: flex;
+				transition: 1.7s;
+			}
+			.hot-content-list > img {
+				flex-shrink: 0;
+			}
+			.post {
+				display: inline-block;
+				position: relative;
+			}
+			.title {
+				position: absolute;
+				right: 0px;
+				left: 0px;
+				bottom: 0px;
+				color: red;
+				text-align: center;
+				background-color: grey;
+			}
+			.post {
+				width: 25%;
+			}
+			.image-post {
+				border: 1px solid red;
+				width: 100%;
+			}
+
+			.aside-article {
+				border: 1px solid red;
+				overflow: auto;
+			}
+			.aside-post {
+				width: 100px;
+				float: left;
+
+			}
+			.nav-responsive {
+				grid-area: nav-responsive;
+				display: none;
+				position: relative;
+				border: 1px solid red;
+			}
+			.menu-icon-responsive {
+				width: 56px
+				height: 56px;
+				border: 1px solid red;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+			}
+			.search-icon-responsive {
+				width: 56px;
+				height: 56px;
+				position: absolute; 
+				top: 0px;
+				right: 0px;
+				border: 1px solid yellow;
+			}
+			.logo-icon-responsive {
+				height: 56px;
+				text-align: center;
+			}
+			.menu-responsive {
+				z-index: 1;
+				border: 2px solid yellow;
+				margin: 0px;
+				display: none;
+			}
+			.menu-responsive  ul {
+				list-style-type: none;
+				padding: 0px;
+			}
+			.menu-responsive > ul > li {
+				border: 1px solid red;
+				font-size: 30px;
+
+			}
+			.sub-menu-responsive > li {
+				font-size: 20px;
+				border: 1px solid green;
+				width: 50%;
+				display: inline-block;
+				margin: 0px;
+			}
+			.logo-icon-responsive > img {
+				width: 100px;
+				height: 56px;
+			}
+			.search-responsive {
+				z-index: 1;
+			}
+	
+			.search-responsive > img {
+				height: 56px;
+			}
+			.search {
+				width: 100%;
+			}
+
+			@media only screen and (max-width: 600px) {
+				.container {
+					grid-template-areas: 
+						"nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive"
+						"hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content"
+						"movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content"
+						" year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content"
+						"contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements";
+				}
+				.nav {
+					display: none;
+				}
+				.nav-responsive {
+					display: block;
+				}
+				.hot-content-list > img {
+					width: 100%;
+				}
+				.post {
+					width: 50%;
+				}
+				.image-post {
+					border: 1px solid red;
+					width: 100%;
+				}
+			}
+
+			@media only screen and (min-width: 600px) {
+				.container {
+					grid-template-areas: 
+						"nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive"
+						"hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content"
+						"movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content"
+						" year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content"
+						"contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements";
+				}
+				.nav {
+					display: none;
+				}
+				.nav-responsive {
+					display: block;
+				}
+				.hot-content-list > img {
+					width: 100%;
+				}
+				.post {
+					width: 50%;
+				}
+				.image-post {
+					border: 1px solid red;
+					width: 100%;
+				}
+			}
+			@media only screen and (min-width: 768px) {
+				.container {
+					grid-template-areas: 
+						"nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive nav-responsive"
+						"hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content"
+						"movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content"
+						" year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content year-movies-content"
+						"contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements";
+				}
+				.nav {
+					display: none;
+				}
+				.nav-responsive {
+					display: block;
+				}
+				.hot-content-list > img {
+					width: 50%;
+				}
+				.post {
+					width: 33.33%;
+				}
+				.image-post {
+					border: 1px solid red;
+					width: 100%;
+				}
+			}
+			@media only screen and (min-width: 992px) {
+				.container {
+					grid-template-columns: repeat(12, 1fr);
+					grid-template-areas: 
+						"nav nav nav nav nav nav nav nav nav nav nav nav"
+						"hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content year-movies-content year-movies-content year-movies-content"
+						"movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content year-movies-content year-movies-content year-movies-content"
+						"contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements";
+				}
+				.nav {
+					display: block;
+				}
+				.nav-responsive {
+					display: none;
+				}
+				.hot-content-list > img {
+					width: 50%;
+				}
+				.nav > input.search {
+					width: 300px;
+				}
+				.post {
+					width: 33.33%;
+				}
+				.image-post {
+					border: 1px solid red;
+					width: 100%;
+				}
+			}
+			@media only screen and (min-width: 1200px) {
+				.container {
+					grid-template-columns: repeat(12, 1fr);
+					grid-template-areas: 
+						"nav nav nav nav nav nav nav nav nav nav nav nav"
+						"hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content hot-content year-movies-content year-movies-content year-movies-content"
+						"movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content movies-content year-movies-content year-movies-content year-movies-content"
+						"contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements contact-and-statements";
+				}
+				.nav {
+					display: block;
+				}
+				.nav-responsive {
+					display: none;
+				}
+				.hot-content-list > img {
+					width: 50%;
+				}
+				.nav > input.search {
+					width: 340px;
+				}
+				.post {
+					width: 25%;
+				}
+				.image-post {
+					border: 1px solid red;
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container" data-a="b">
+			<nav class="item nav">
+				<div class="logo">
+					<img src="./images/logoMovies20.png" />
+				</div>
+				<ul class="menu"> 
+					<li>Phim lẻ</li><li>Phim bộ</li><li class="sub-menu">Thể loại
+						<ul class="sub-menu-content">
+							<li>Phim Cổ Trang</li><li>Phim Tâm Lý</li><li>Phim Tình Cảm</li><li>Phim Bí Ẩn</li><li>Phim Kinh Dị</li><li>Phim Hành Động</li><li>Phim Võ Thuật</li><li>Phim Kịch Tính</li><li>Phim Chiến Tranh</li><li>Phim Phiêu Lưu</li>
+						</ul>
+					</li><li class="sub-menu">Quốc gia
+						<ul class="sub-menu-content">
+							<li>Phim Âu Mỹ</li><li>Phim Hàn Quốc</li><li>Phim Trung Quốc</li><li>Phim Nhật Bản</li><li>Phim Đài Loan</li>				
+						</ul>
+					</li>
+				</ul>		
+				<input class="search" type="search" />
+			</nav>
+			<nav class="item nav-responsive">
+				<div>
+					<div class="menu-icon-responsive">
+						<img src="./images/menu.png" />		
+					</div>
+					<div class="logo-icon-responsive">
+						<img src="./images/logoMovies20.png" />
+					</div>
+					<div class="search-icon-responsive">
+						<img src="./images/search-icon.png" />
+					</div>
+				</div>
+				<div class="search-responsive">
+					<form>
+						<input class="search" type="search" />
+					</form>
+				</div>
+				<div class="menu-responsive">
+					<ul>
+						<li>Phim lẻ</li><li>Phim bộ</li><li>Thể loại
+							<ul class="sub-menu-responsive">
+								<li>Phim Cổ Trang</li><li>Phim Tâm Lý</li><li>Phim Tình Cảm</li><li>Phim Bí Ẩn</li><li>Phim Kinh Dị</li><li>Phim Hành Động</li><li>Phim Võ Thuật</li><li>Phim Kịch Tính</li><li>Phim Chiến Tranh</li><li>Phim Phiêu Lưu</li>
+							</ul>
+						</li><li>Quốc gia
+							<ul class="sub-menu-responsive">
+								<li>Phim Âu Mỹ</li><li>Phim Hàn Quốc</li><li>Phim Trung Quốc</li><li>Phim Nhật Bản</li><li>Phim Đài Loan</li>	
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<section class="item hot-content">
+				<div class="hot-content-list">
+					<img src="./images/movie1.jpg" /><img src="./images/movie2.jpg" /><img src="./images/movie3.jpg" /><img src="./images/movie4.jpg" /><img src="./images/movie1.jpg" /><img src="./images/movie2.jpg" /><img src="./images/movie3.jpg" /><img src="./images/movie4.jpg" />
+				</div>
+				<button data-item="1">a</button> <button data-item="2">b</button> <button data-item="3">c</button> <button data-item="4">d</button>
+			</section>
+			<section class="item movies-content"> 
+				<h2>PHIM NỔI BẬT</h2>
+				<article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" />
+					<div class="title">
+						phim hay
+					</div>
+				</article><article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" />
+					<div class="title">
+						phim hay
+					</div>
+				</article><article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" />
+					<div class="title">
+						phim hay
+					</div>
+				</article><article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" /><div class="title">
+						phim hay
+					</div>
+				</article><article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" /><div class="title">
+						phim hay
+					</div>
+				</article><article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" /><div class="title">
+						phim hay
+					</div>
+				</article><article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" /><div class="title">
+						phim hay
+					</div>
+				</article><article class="post">
+					<img class="image-post" src="./images/posts/image1.jpg" /><div class="title">
+						phim hay
+					</div>
+				</article>
+
+
+
+
+			</section>
+			<aside class="item year-movies-content">
+				<h2>TOP PHIM LẺ HAY NHẤT MỌI THỜI ĐẠI</h2>
+				<article class="aside-article">
+					<img class="aside-post" src="./images/aside/image1.jpg" /> <span>De</span>adpool and Wolverine<br><span>Lượt xem</span>
+				</article><article class="aside-article">
+					<img class="aside-post" src="./images/aside/image1.jpg" /> <span>De</span>adpool and Wolverine<br><span>Lượt xem</span>
+				</article><article class="aside-article">
+					<img class="aside-post" src="./images/aside/image1.jpg" /> <span>De</span>adpool and Wolverine<br><span>Lượt xem</span>
+				</article><article class="aside-article">
+					<img class="aside-post" src="./images/aside/image1.jpg" /> <span>De</span>adpool and Wolverine<br><span>Lượt xem</span>
+				</article><article class="aside-article">
+					<img class="aside-post" src="./images/aside/image1.jpg" /> <span>De</span>adpool and Wolverine<br><span>Lượt xem</span>
+				</article>							
+			</aside> 
+			<footer class="item contact-and-statements"></footer> 
+		</div>
+	</body>
+		<script>
+			
+			
+			const buttons = document.querySelectorAll(".hot-content > button");
+			const hotContentList = document.querySelectorAll(".hot-content-list")[0];
+			hotContentListStyle = window.getComputedStyle(hotContentList);
+			let fn = (function() {
+				let currentItem = 1;
+				return function(item) {
+					let hotContentListWidth = Number.parseFloat(hotContentListStyle.getPropertyValue("width").slice(0,-2));
+					if (item) {
+						currentItem = item;
+					} else {
+						let temp = currentItem + 1;
+						currentItem = temp > 4 ? 1 : temp;
+					}
+					hotContentList.style.transform = `translateX(${(currentItem - 1) * hotContentListWidth * -1}px)`;
+				};
+			})();
+			setInterval(() => {
+				fn();
+			}, 5000);
+			buttons.forEach((button) => {
+				button.addEventListener("click", (e) => {
+					fn(parseInt(e.target.dataset.item));
+				});
+			});
+		</script>
+		<script> // them element vao
+			const menu_content_lis = document.getElementsByClassName("sub-menu");
+			const menu_contents = document.getElementsByClassName("sub-menu-content");
+			Array.from(menu_content_lis).forEach((li) => {
+				li.addEventListener("mouseenter", (e) => {
+					e.target.children[0].classList.toggle("active");
+				});
+				li.addEventListener("mouseleave", (e) => {
+					e.target.children[0].classList.toggle("active");
+				});
+
+			});
+		</script>
+		<script>
+			const menuIRes = document.getElementsByClassName("menu-icon-responsive");
+			const menuRes = document.getElementsByClassName("menu-responsive");
+			const menuResStyle = window.getComputedStyle(menuRes[0]);
+			menuIRes[0].addEventListener("click", (e) => {
+				if (menuResStyle.getPropertyValue("display") == "none") {
+					menuRes[0].style.display = "block";
+				} else {
+					menuRes[0].style.display = "none";
+				}
+			});
+			const searchIRes = document.getElementsByClassName("search-icon-responsive");
+			const searchRes = document.getElementsByClassName("search-responsive");
+			const searchStyle = window.getComputedStyle(searchRes[0]);
+			searchIRes[0].addEventListener("click", (e) => {
+				if (searchStyle.getPropertyValue("display") == "none") {
+					searchRes[0].style.display = "block";
+				} else {
+					searchRes[0].style.display = "none";
+				}
+			});
+		</script>
+</html>
